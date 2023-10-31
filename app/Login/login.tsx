@@ -33,6 +33,7 @@ const Login = (props:any) => {
     const submitHandler =()=>{
         setIsSubmit(true);
         props.onLogin(true);
+        localStorage.setItem("isLoggedIn","true")
     }
     return (
     <div className="text-black w-1/3 shadow-xl shadow-slate-500 flex flex-col items-center gap-8 px-2 py-4">

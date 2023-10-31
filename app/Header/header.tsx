@@ -1,7 +1,8 @@
 const Header = (props: any) => {
   const userLoggedIn = props?.hasLoggedIn;
   const logoutHandler =()=>{
-    props?.onLogin(false)
+    props?.onLogin(false);
+    localStorage.setItem("isLoggedIn","false");
   }
   return (
     <div className="bg-orange-500 flex justify-between p-4 w-full">
