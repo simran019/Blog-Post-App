@@ -8,6 +8,7 @@ const defaultPostState = {
 const postReducer =(state:any,action:any)=>{
     if(action.type=="ADD_POST"){
         const newPosts = state.posts.concat(action.payload);
+        console.log(newPosts,"new")
         return{
             posts:newPosts
         }

@@ -6,10 +6,12 @@ import Header from "./Header/header";
 import Login from "./Login/login";
 import AddPost from "./AddPost/addPost";
 import PostProvider from "./store/postProvider";
+import ShowPost from "./ShowPost/page";
 
 export default function Home() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [section, setSection] = useState("home");
 
   const loginHandler =(val:boolean)=>{
     setIsLoggedIn(val)
@@ -23,9 +25,10 @@ export default function Home() {
   return (
     <PostProvider>
     <div className="text-white w-screen h-screen flex flex-col items-center gap-10">
-      <Header hasLoggedIn={isLoggedIn} onLogin={loginHandler}/>
+      <Header hasLoggedIn={isLoggedIn} onLogin={loginHandler} onChangeSection={setSection}/>
       { isLoggedIn==false && <Login onLogin={loginHandler}/> }
-      { isLoggedIn && <AddPost/>}
+      { isLoggedIn && section=="add" && <AddPost/>}
+      { section=="home" && <ShowPost/> }
     </div>
     </PostProvider>
   )
