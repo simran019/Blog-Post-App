@@ -32,8 +32,12 @@ const Login = (props:any) => {
 
     const submitHandler =()=>{
         setIsSubmit(true);
-        props.onLogin(true);
-        localStorage.setItem("isLoggedIn","true")
+        if(username.validity==true && password.validity==true){
+          props.onLogin(true);
+          localStorage.setItem("isLoggedIn","true")
+        }else{
+          props.onLogin(false);
+        }
     }
     return (
     <div className="text-black w-1/3 shadow-xl shadow-slate-500 flex flex-col items-center gap-8 px-2 py-4">
@@ -62,9 +66,11 @@ const Login = (props:any) => {
             alt="password_logo"
           />
           <input
+          type="password"
             className="rounded-md p-2 border-2 border-orange-500"
             placeholder="password"
             onChange={(event)=>inputHandler("password",event.target.value)}
+            
           />
         </div>
         {isSubmit && password.validity==false && <span className="text-red-800">Invalid Password</span>}

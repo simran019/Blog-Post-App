@@ -7,6 +7,7 @@ import Login from "./Login/login";
 import AddPost from "./AddPost/addPost";
 import PostProvider from "./store/postProvider";
 import ShowPost from "./ShowPost/page";
+import DeletePost from "./DeletePost/page";
 
 export default function Home() {
 
@@ -22,13 +23,17 @@ export default function Home() {
       setIsLoggedIn(true)
     }
   },[])
+  
   return (
     <PostProvider>
-    <div className="text-white w-screen h-screen flex flex-col items-center gap-10">
+    <div className="text-white w-screen h-screen flex flex-col items-center gap-24">
       <Header hasLoggedIn={isLoggedIn} onLogin={loginHandler} onChangeSection={setSection}/>
       { isLoggedIn==false && <Login onLogin={loginHandler}/> }
-      { isLoggedIn && section=="add" && <AddPost/>}
-      { section=="home" && <ShowPost/> }
+      { isLoggedIn==true && section=="add" && <AddPost/>}
+      { isLoggedIn==true && section=="home" && <ShowPost/> }
+      {
+        isLoggedIn==true && section=="delete" && <DeletePost/>
+      }
     </div>
     </PostProvider>
   )

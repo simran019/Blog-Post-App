@@ -14,6 +14,14 @@ const postReducer =(state:any,action:any)=>{
         }
         
     }
+    if(action.type=="DELETE_POST"){
+        const newPosts = state.posts.filter((post:any)=>post.id!==action.payload);
+        console.log(newPosts)
+        return{
+            posts:newPosts
+        }
+        
+    }
     return defaultPostState;
 }
 
@@ -25,8 +33,8 @@ const PostProvider =(props:any)=>{
         dispatchPostAction({type:"ADD_POST",payload:item})
     }
 
-    const deletePostHandler =(id:any)=>{
-
+    const deletePostHandler =(id:string)=>{
+        dispatchPostAction({type:"DELETE_POST",payload:id})
     }
 
     const postContext ={

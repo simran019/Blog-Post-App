@@ -6,21 +6,28 @@ import Image from "next/image";
 import TitleIcon from "../../public/images/icons8-title-50.png";
 import DescriptionIcon from "../../public/images/icons8-description-100.png";
 import PostContext from "../store/post-context";
+import { randomInt } from "crypto";
 
 const AddPost = () => {
-  
   const postCtx = useContext(PostContext);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const submitHandler =()=>{
-    postCtx.addPost({
-      id:'post1',
-      title:title,
-      description:description
-    })
-  }
+  const submitHandler = () => {
+    if (title == "" || description == "") {
+      alert("Add all the data");
+    } else {
+      postCtx.addPost({
+        id: "post " + Math.random(),
+        title: title,
+        description: description,
+      });
+      alert("Post added");
+      setTitle("");
+      setDescription("")
+    }
+  };
 
   return (
     <div className="text-black w-1/3 shadow-xl shadow-slate-500 flex flex-col items-center gap-8 px-2 py-4">
@@ -32,7 +39,8 @@ const AddPost = () => {
           <input
             className="rounded-md p-2 border-2 border-orange-500"
             placeholder="Enter Post title"
-              onChange={(event)=>setTitle(event.target.value)}
+            ref={title}
+            onChange={(event) => setTitle(event.target.value)}
           />
         </div>
         {/* {isSubmit && username.validity==false && <span className="text-red-800">Invalid Username</span>} */}
@@ -44,9 +52,10 @@ const AddPost = () => {
             alt="password_logo"
           />
           <input
+          ref={description}
             className="rounded-md p-2 border-2 h-64 border-orange-500"
             placeholder="Enter description"
-              onChange={(event)=>setDescription(event.target.value)}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </div>
         {/* {isSubmit && password.validity==false && <span className="text-red-800">Invalid Password</span>} */}

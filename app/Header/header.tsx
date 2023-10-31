@@ -5,7 +5,7 @@ import PostProvider from "../store/postProvider";
 
 const Header = (props: any) => {
 
-  const [section, setSection] = useState("");
+  const [section, setSection] = useState("home");
 
   const postCtx = useContext(PostContext);
   const posts = postCtx.posts;
